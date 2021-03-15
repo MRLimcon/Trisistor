@@ -1,14 +1,10 @@
 ## Trisistor
 Simulação de um transistor MOSFET trinário
 
-## Modelo
+## Modelo e resultados
 
-![alt text] (https://github.com/MRLimcon/Trisistor/blob/main/modelo.png?raw=true)
+![Modelo](https://raw.githubusercontent.com/MRLimcon/Trisistor/main/modelo.png)
 
-## Desativado
+![Desativado](https://raw.githubusercontent.com/MRLimcon/Trisistor/main/Resultados/desativado.png)
 
-![alt text] (https://raw.githubusercontent.com/MRLimcon/Trisistor/main/Resultados/desativado.png)
-
-## Ativado
-
-![alt text] (https://raw.githubusercontent.com/MRLimcon/Trisistor/main/Resultados/ativado.png)
+![Ativado](https://raw.githubusercontent.com/MRLimcon/Trisistor/main/Resultados/ativado.png)
