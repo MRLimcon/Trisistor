@@ -3,7 +3,7 @@ Simulação de um transistor MOSFET trinário
 
 ## Modelo
 
-!(https://raw.githubusercontent.com/MRLimcon/Trisistor/main/modelo.png)
+![alt text] (https://github.com/MRLimcon/Trisistor/blob/main/modelo.png?raw=true)
 
 ## Desativado
 
