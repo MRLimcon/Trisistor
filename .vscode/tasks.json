@@ -41,7 +41,7 @@
             "type": "shell",
             "command": "python3",
             "args": [
-                "./automato-covid.py"
+                "./trisistor.py"
             ],
             "group": "build"
         },
