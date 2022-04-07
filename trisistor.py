@@ -1,32 +1,48 @@
-import trisistor as tr
+import ternary_modules.ternary_calculations as calculations
+import ternary_modules.utils as utils
+import sys
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
+
 plt.style.use('ggplot')
 
-n = 100
-polos = tr.trisis.geracao_polos(n)
-campo_base = tr.trisis.geracao_campo(polos,n)
-elecbur = tr.trisis.geracao_bur_elec(n)
+if len(sys.argv) <= 2:
+    print("Coloque os argumentos para a ativação")
+    print("1 para ativado ou 0 para desativado e depois a quantidade de iterações")
+    print("Exemplo: python ./trisistor.py 1 500")
+    exit()
+is_activated = int(sys.argv[1])
+time = int(sys.argv[2])
 
-for i in range(200):
-    if i == 50:
+n = 100
+polos = utils.utils.generate_doping(n, is_activated)
+
+campo_base = utils.utils.generate_field(polos, n)
+
+# plt.quiver(campo_base[:, :, 0], campo_base[:, :, 1])
+# plt.title("Campo elétrico inicial")
+# plt.show()
+elecbur = utils.utils.generate_electrons(n)
+
+for i in range(time):
+    if i % 20 == 0:
         t = 1
     else:
         t = 0
-    #print(i,"teste")
-    campo = tr.trisis.atualizacao_campo(elecbur,campo_base,n)
-    #print(i)
-    elecbur = tr.trisis.atualizacao_elecbur(elecbur,campo,t,n)
 
-densidade = tr.trisis.c_densidade(elecbur,polos,n)
-#print(densidade)
+    campo = calculations.trisistor.update_field(elecbur, campo_base, n)
+    elecbur = calculations.trisistor.update_positions(elecbur, campo, t, n)
 
-#plt.quiver(campo_base[:,:,0],campo_base[:,:,1])
-#plt.show()
-plt.imshow(densidade, interpolation='none')
+densidade = utils.utils.calculate_density(elecbur, polos, n)
+
+# Plots
+plt.quiver(campo[:, :, 0], campo[:, :, 1])
+plt.title("Campo elétrico final")
 plt.show()
-#plt.imshow(polos, interpolation='none')
-#plt.show()
-#plt.imshow(elecbur, interpolation='none')
-#plt.show()
+
+plt.imshow(densidade, interpolation='none', vmin=-10, vmax=10)
+plt.title("Densidade eletrônica em cada ponto")
+plt.show()
+
+plt.imshow(elecbur, interpolation='none')
+plt.title("Localização dos elétrons e dos buracos")
+plt.show()
