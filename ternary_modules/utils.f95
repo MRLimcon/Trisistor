@@ -9,12 +9,8 @@ module utils
         integer, intent(in) :: m, is_activated
         integer, parameter :: n = 100
         integer :: i,j, polos(m,m)
-        integer, allocatable :: posicoes(:,:)
-        real, allocatable :: r(:,:), r2(:,:)
-
-        allocate(posicoes(m,m))
-        allocate(r(m,m))
-        allocate(r2(m,m))
+        integer :: posicoes(m,m)
+        real :: r(m,m), r2(m,m)
 
         call RANDOM_NUMBER(r)
         call RANDOM_NUMBER(r2)
@@ -34,10 +30,6 @@ module utils
             end do
         end do
         !$OMP END PARALLEL DO SIMD
-
-        deallocate(posicoes)
-        deallocate(r)
-        deallocate(r2)
 
         do i = 1, m, 2
             polos(1,i) = 4
@@ -130,7 +122,6 @@ module utils
         polos2 = polos
         polos2(1:m,1) = 0
         polos2(1:m,m) = 0
-        !polos2(45,45:55) = 0
         polos2(1,1:m) = 0
         polos2(m,1:m) = 0
         polos2(35:m,m) = 0
